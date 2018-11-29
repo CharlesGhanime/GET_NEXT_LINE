@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 20:00:22 by cghanime          #+#    #+#             */
-/*   Updated: 2018/11/28 18:11:11 by cghanime         ###   ########.fr       */
+/*   Updated: 2018/11/29 19:55:13 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
 
 typedef struct		s_list
 {
@@ -47,6 +43,7 @@ char				*ft_strcat(char *dst, const char *src);
 char				*ft_strncat(char *dst, const char *src, size_t len);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 char				*ft_strchr(const char *s, int c);
+int					ft_strnchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *str, const char *to_find);
 char				*ft_strnstr(const char *haystack, const char *needle,
@@ -106,7 +103,6 @@ void				ft_is_negative(int n);
 int					ft_counter(int n);
 int					ft_wordcounter(char const *s, char c);
 char				**ft_filling(char const *s, char c, char **tab);
-int					get_next_line(const int fd, char **line);
 
 
 /*
