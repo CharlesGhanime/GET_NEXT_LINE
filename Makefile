@@ -70,7 +70,7 @@ SRCS= 	ft_memset.c \
 		ft_lstadd.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
-		get_next_line.c \
+		ft_strnchr.c
 
 OBJECTS = $(SRCS:.c=.o)
 all: $(NAME)
