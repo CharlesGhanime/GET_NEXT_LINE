@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   liste.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 19:04:42 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/01 21:17:18 by cghanime         ###   ########.fr       */
+/*   Created: 2018/11/30 18:32:31 by cghanime          #+#    #+#             */
+/*   Updated: 2018/11/30 18:45:03 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-#define GET_NEXT_LINE_H
+typedef struct s_list
+{
+	char *a
+	struct s_list *next;
+}				t_list;o
 
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include "libft.h"
+content1 = fd
 
-# define BUFFER_SIZE 20
+while ()
 
-int		get_next_line(const int fd, char **line);
-
-#endif
+t_list *str 
+str = malloc(sizeof(t_list));

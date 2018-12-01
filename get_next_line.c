@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 17:41:11 by cghanime          #+#    #+#             */
-/*   Updated: 2018/11/30 18:55:25 by cghanime         ###   ########.fr       */
+/*   Updated: 2018/12/01 21:17:15 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,32 @@ int		get_next_line(const int fd, char **line)
 	int read_return;
 	char buffer[BUFFER_SIZE + 1];
 	char *tmp;
-	char *rest;
+	char *gnl;
 
-	rest = NULL;
+	gnl = NULL;
 	tmp = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	while ((read_return = read(fd, buffer, BUFFER_SIZE)) 
 	&& ft_strnchr(buffer, '\n') < 0)
 	{
 	buffer[read_return] = '\0';
-		if (rest == NULL)
-			rest = ft_strdup(buffer);
+		if (gnl == NULL)
+			gnl = ft_strdup(buffer);
 		else
 		{
-			tmp = malloc(sizeof(char ) * ft_strlen(rest) + BUFFER_SIZE + 1);
-			ft_strcpy(tmp, rest);
-			ft_strcat(tmp, buffer);
-			rest = tmp;
+			tmp = malloc(sizeof(char ) * ft_strlen(gnl) + BUFFER_SIZE + 1);
+			ft_strcpy(tmp, gnl);
+			printf("1.Retour de strcpy\n");
+			printf("1.%s\n", ft_strcpy(tmp, gnl));
+			ft_strjoin(tmp, buffer);
+			printf("2.Retour de strjoin\n");
+			printf("2.%s\n", ft_strcat(tmp, buffer));
+			gnl = tmp;
+			printf("3. Contenu de gnl\n");
+			printf("3.%s\n", gnl);
 		}
 	}
-	*line = rest;
-	ft_putstr(rest);
+	*line = gnl;
+	//ft_putstr(gnl);
 	return (0);
 }
 
@@ -55,9 +61,7 @@ int		main(int argc, char **argv)
 			ft_putstr("open() failed");
 			return (1);
 		}
-
-	get_next_line(fd, &tab);
-
+		get_next_line(fd, &tab);
 			if (close(fd) == -1)
 		{
 			ft_putstr("close() failed");
