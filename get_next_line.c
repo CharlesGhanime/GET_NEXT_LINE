@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 17:41:11 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/02 16:48:52 by cghanime         ###   ########.fr       */
+/*   Updated: 2018/12/04 21:28:33 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,21 @@ int		get_next_line(const int fd, char **line)
 	char *tmp;
 	char *rest;
 
-	rest = NULL;
-	tmp = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	tmp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	while ((read_return = read(fd, buffer, BUFFER_SIZE)) 
 	&& ft_strnchr(buffer, '\n') < 0)
 	{
-	buffer[read_return] = '\0';
-		if (rest == NULL)
-			rest = ft_strdup(buffer);
+	buffer[BUFFER_SIZE + 1] = '\0';
+		if (*line == NULL)
+			*line = ft_strdup(buffer);
 		else
 		{
-			tmp = malloc(sizeof(char ) * ft_strlen(rest) + ft_strlen(buffer) + 1);
-			ft_strcpy(tmp, rest);
-			ft_strcat(tmp, buffer);
-			rest = tmp;
+			tmp = malloc(sizeof(char ) * ft_strlen(*line) + ft_strlen(buffer) + 1);
+			ft_memccpy(tmp, *line, '\0', BUFFER_SIZE);
+			*line = ft_strjoin(tmp, buffer);
 		}
 	}
-	*line = rest;
-	ft_putstr(rest);
+	ft_putstr(*line);
 	return (0);
 }
 

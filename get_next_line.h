@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 19:04:42 by cghanime          #+#    #+#             */
-/*   Updated: 2018/11/30 18:55:29 by cghanime         ###   ########.fr       */
+/*   Updated: 2018/12/04 20:35:33 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include "libft.h"
+# include "libft/libft.h"
 
 # define BUFFER_SIZE 10
 
