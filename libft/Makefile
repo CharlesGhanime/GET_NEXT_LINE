@@ -70,7 +70,11 @@ SRCS= 	ft_memset.c \
 		ft_lstadd.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
+		ft_lst_is_empty.c \
+		ft_lst_length.c \
+		ft_print_lst.c \
 		ft_strnchr.c
+
 
 OBJECTS = $(SRCS:.c=.o)
 all: $(NAME)

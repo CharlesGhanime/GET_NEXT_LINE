@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 20:00:22 by cghanime          #+#    #+#             */
-/*   Updated: 2018/11/30 18:51:25 by cghanime         ###   ########.fr       */
+/*   Updated: 2018/12/06 21:00:41 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef enum	BOOLEAN
+{
+	FALSE,
+	TRUE
+}				BOOL;
+
 typedef struct		s_list
 {
-	void			*content;
-	size_t			content_size;
+	//void			*content;
+	//size_t		content_size;
+	int value;
 	struct s_list	*next;
 }					t_list;
 
@@ -115,4 +122,7 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+BOOL				ft_lst_is_empty(t_list *lst);
+int					ft_lst_length(t_list *lst);
+void				ft_print_lst(t_list *lst);
 #endif
