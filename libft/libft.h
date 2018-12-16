@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 20:00:22 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/06 21:00:41 by cghanime         ###   ########.fr       */
+/*   Updated: 2018/12/07 18:43:34 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ typedef enum	BOOLEAN
 
 typedef struct		s_list
 {
-	//void			*content;
-	//size_t		content_size;
-	int value;
+	void			*content;
+	size_t		content_size;
 	struct s_list	*next;
 }					t_list;
 

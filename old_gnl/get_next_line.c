@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 17:41:11 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/04 21:28:33 by cghanime         ###   ########.fr       */
+/*   Updated: 2018/12/16 22:00:25 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		get_next_line(const int fd, char **line)
 
 	tmp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	while ((read_return = read(fd, buffer, BUFFER_SIZE)) 
-	&& ft_strnchr(buffer, '\n') < 0)
+	&& ft_strnchr(buffer, '\n') < 0 && ft_strnchr(buffer, '\0'))
 	{
 	buffer[BUFFER_SIZE + 1] = '\0';
 		if (*line == NULL)
