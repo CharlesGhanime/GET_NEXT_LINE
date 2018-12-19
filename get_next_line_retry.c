@@ -6,41 +6,57 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 18:15:01 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/18 21:11:54 by cghanime         ###   ########.fr       */
+/*   Updated: 2018/12/19 20:16:19 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "get_next_line.h"
 
+
+
 int		get_next_line(const int fd, char **line)
 {
-	static char	*c[2147483647];
-	char		buffer[BUFF_SIZE + 1];
-	char		*tmp;
-	ssize_t		b;
-	int			endl;
+	char		buff[BUFF_SIZE + 1];
+	int		ret;
+	t_list	*lst;
 
-	if (fd < 0 || (!c[fd] && !(c[fd] = ft_strnew(1))) || !line)
-		return (-1);
-	while (!ft_strchr(c[fd], '\n') && (b = read(fd, buffer, BUFF_SIZE)) > 0)
-	{
-		buffer[b] = '\0';
-		tmp = c[fd];
-		c[fd] = ft_strjoin(c[fd], buffer);
-		ft_strdel(&tmp);
-	}
-	if (b == -1 || !*(tmp = c[fd]))
-		return (b == -1 ? -1 : 0);
-	if ((endl = (ft_strchr(c[fd], '\n') > 0)))
-		*line = ft_strsub(c[fd], 0, ft_strchr(c[fd], '\n') - c[fd]);
-	else
-		*line = ft_strdup(c[fd]);
-	c[fd] = ft_strsub(c[fd], (unsigned int)(ft_strlen(*line) + endl),
-			(size_t)(ft_strlen(c[fd]) - (ft_strlen(*line) + endl)));
-	ft_strdel(&tmp);
-	return (!(!c[fd] && !ft_strlen(*line)));
+	while ((ret = read(fd, buff, BUFF_SIZE) > 0) && 
+	!(ft_strchr(buff, '\n')) && !(ft_strchr(buff, '\0')))
+		{
+			if (lst->content)
+			{
+				
+			}
+			buff[ret] = '\0';
+			ft_memccpy(*line, buff, '\n', ret);
+			if (BUFF_SIZE - ret != 0)
+				{
+					ft_strsub(lst->content, ft_strlen(*line) + 1,
+					ft_strlen(lst->content) - ft_strlen(*line));
+				}
+		}
+	return (**line);
 }
+
+/*
+void	ft_multi_fd(int fd, t_list *lst)
+{
+	if (lst)
+	{
+		while (lst)
+		{
+			if (lst->content_size = fd)
+				return (fd)
+			lst = ft_lstnew(NULL, 0);
+			lst->content_size = fd;
+		}
+	}
+	lst = ft_lstnew(NULL, 0);
+	lst->content_size = fd;
+>>>>>>> 7eab96f01fa61a771e27fcdf55d2df768f7a17e7
+}
+*/
 
 /*
  ** MAIN TEST
