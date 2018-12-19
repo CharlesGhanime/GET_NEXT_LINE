@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 13:48:57 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/19 20:13:26 by cghanime         ###   ########.fr       */
+/*   Updated: 2018/12/19 22:35:41 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_list		*ft_multi_fd(int fd, t_list *lst)
 		{
 			if (node->next->content_size == fd)
 			{
-				node->next = node->next->next;
 				node->next->next = lst;
+				node->next = node->next->next;
 				return (node->next);
 			}
 			node = node->next;
@@ -35,11 +35,11 @@ t_list		*ft_multi_fd(int fd, t_list *lst)
 		node->next = lst;
 		return (node);
 	}
-	//lst = ft_lstnew(NULL, fd);
-	return (NULL);
+	lst = ft_lstnew(NULL, fd);
+	return (lst);
 }
 
-int		fill_line(t_list *lst, char **line)
+int		ft_fill_line(t_list *lst, char **line)
 {
 	char    *tmp;
 	int     index;
@@ -61,6 +61,7 @@ int		ft_read(t_list *lst, char **line, int fd)
 	char            buff[BUFF_SIZE + 1];
 	int             ret;
 
+	ft_bzero(buff, BUFF_SIZE + 1);
 	while (!ft_strchr(buff, '\n'))
 	{
 		ret = read(fd, buff, BUFF_SIZE);
@@ -69,14 +70,14 @@ int		ft_read(t_list *lst, char **line, int fd)
 			break ;
 		lst->content = ft_strjoinf((char *)lst->content, buff, 1);
 	}
-	if ((fill_line(lst, line) == 0) && ret < BUFF_SIZE)
+	if ((ft_fill_line(lst, line) == 0) && ret < BUFF_SIZE)
 		return (0);
 	return (1);
 }
 
 int     get_next_line(const int fd, char **line)
 {
-	static t_list   *lst = NULL;
+	static t_list   *lst;
 
 	if (!line || fd < 0 || BUFF_SIZE <= 0)
 		return (-1);
@@ -84,41 +85,15 @@ int     get_next_line(const int fd, char **line)
 	if (lst)
 	{
 			if (ft_strchr(lst->content, '\n'))
-				return (fill_line(lst, line));
+				return (ft_fill_line(lst, line));
 		return (ft_read(lst, line, fd));
 	}
-	if (!lst)
+	/*if (!lst)
 	{
 		if (!(lst = ft_lstnew(NULL, fd)))
 			return (-1);
 		lst->content_size = fd;
 		return (ft_read(lst, line, fd));
-	}
-	return (1);
-}
-
-int		main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-	int		ret;
-	int		i;
-
-	fd = 0;
-	line = NULL;
-	if (argc > 1)
-		if ((fd = open(argv[1], O_RDONLY)) < 0)
-			return (-1);
-	ret = 1;
-	i = 1;
-	while ((ret = get_next_line(fd, &line)) > 0)
-	{
-		printf("line = %s\n", line);
-		printf("return = %d\n", ret);
-		free(line);
-		line = NULL;
-	}
-	printf("final return = %d\n", ret);
-	close(fd);
-	return (0);
+	}*/
+		return (1);
 }
