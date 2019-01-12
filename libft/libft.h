@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 20:00:22 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/07 18:43:34 by cghanime         ###   ########.fr       */
+/*   Updated: 2019/01/12 20:18:13 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void				ft_is_negative(int n);
 int					ft_counter(int n);
 int					ft_wordcounter(char const *s, char c);
 char				**ft_filling(char const *s, char c, char **tab);
-
+char				*ft_strjoinf(char *s1, char *s2, int flag);
 
 /*
 ** BONUS SINGLY-LINKED LISTS
@@ -124,4 +124,8 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 BOOL				ft_lst_is_empty(t_list *lst);
 int					ft_lst_length(t_list *lst);
 void				ft_print_lst(t_list *lst);
+t_list				*ft_lst_last(t_list *lst);
+void				ft_lst_push_back(t_list **begin_lst, void *content
+, size_t content_size);
+
 #endif

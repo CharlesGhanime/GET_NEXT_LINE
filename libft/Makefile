@@ -73,8 +73,10 @@ SRCS= 	ft_memset.c \
 		ft_lst_is_empty.c \
 		ft_lst_length.c \
 		ft_print_lst.c \
-		ft_strnchr.c
-
+		ft_strnchr.c \
+		ft_lst_push_back.c \
+		ft_lst_last.c \
+		ft_strjoinf.c
 
 OBJECTS = $(SRCS:.c=.o)
 all: $(NAME)

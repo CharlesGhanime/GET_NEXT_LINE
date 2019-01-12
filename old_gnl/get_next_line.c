@@ -5,64 +5,83 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 17:41:11 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/16 22:00:25 by cghanime         ###   ########.fr       */
+/*   Created: 2018/12/16 18:15:01 by cghanime          #+#    #+#             */
+/*   Updated: 2018/12/18 16:50:10 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
+#include "libft/libft.h"
+
+/*
+** check open :
+** si fd == -1 return (-1)
+** sinon return (fd);
+** lecture :
+** 3 cas de lectures : 
+**
+** (checker si tmp est vide ou 
+** non et si il ne l'est pas lire tmp et stocker dans line)
+**
+** 1er cas : si '\n' avant la fin de buffer
+** memccpy jusqu'a '\n' dans buff et strncpy le reste dans tmp (content)
+**
+** 2e cas : si '\n' pile a la fin du buffer
+** memccpy jusqu'a '\n'
+**
+** 3e cas : pas de '\n' dans le buffer
+** memcpy la longueur de buff (BUFF_SIZE)
+**
+** gestion des fd : quand je recois un fd valide je dois 
+** -> checker si lst existe
+** la creer si elle n'existe pas
+** la parcourir : si fd existe je break
+** sinon si fd n'existe pas je creer un nouveau maillon avec fd dedans
+*/
+
+
+
+int		ft_check(const int fd)
+{
+	if (fd == -1)
+	{
+		ft_putstr("open failed");
+		return (-1);
+	}
+	return (fd);
+}
+
+void	ft_filling_line(t_list *lst, char **line)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while ((char *)lst->content[i] != '\n' && ((char *)lst->content)[i] != '\0')
+		i++;
+	if (i == 0)
+		return ;
+	*line = ft_strnew(i);
+
+}
 
 int		get_next_line(const int fd, char **line)
 {
-	int read_return;
-	char buffer[BUFFER_SIZE + 1];
-	char *tmp;
-	char *rest;
-
-	tmp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while ((read_return = read(fd, buffer, BUFFER_SIZE)) 
-	&& ft_strnchr(buffer, '\n') < 0 && ft_strnchr(buffer, '\0'))
+	int ret;
+	int i;
+	char buff[BUFF_SIZE + 1];
+	static t_list *lst;
+	if (!line || fd < 0 || BUFF_SIZE <= 0)
+		return (-1);
+	if (lst)
 	{
-	buffer[BUFFER_SIZE + 1] = '\0';
-		if (*line == NULL)
-			*line = ft_strdup(buffer);
-		else
-		{
-			tmp = malloc(sizeof(char ) * ft_strlen(*line) + ft_strlen(buffer) + 1);
-			ft_memccpy(tmp, *line, '\0', BUFFER_SIZE);
-			*line = ft_strjoin(tmp, buffer);
-		}
+		
 	}
-	ft_putstr(*line);
-	return (0);
-}
 
-int		main(int argc, char **argv)
+	return ();
+}
+int		main()
 {
-	int fd;
-	char *tab;
-	//t_list *list;
-	//list = NULL;
-	//list =  malloc (sizeof(t_list));
-	if (argc == 2)
-	{
-		if ((fd = open(argv[1], O_RDONLY)) == -1)
-		{
-			ft_putstr("open() failed");
-			return (1);
-		}
-
-	get_next_line(fd, &tab);
-
-			if (close(fd) == -1)
-		{
-			ft_putstr("close() failed");
-			return (1);
-		}
-	}
-	else
-		ft_putstr("Too few arguments");
+	
 	return (0);
 }
-

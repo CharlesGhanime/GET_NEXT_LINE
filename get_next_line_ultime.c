@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 18:01:04 by cghanime          #+#    #+#             */
-/*   Updated: 2019/01/08 18:21:43 by cghanime         ###   ########.fr       */
+/*   Updated: 2019/01/12 14:53:08 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int		*ft_multi_fd(int fd, t_list *lst)
+t_list		*ft_multi_fd(int fd, t_list *lst)
 {
 	t_list *head;
 	t_list *node;
@@ -41,19 +41,23 @@ void		ft_filling_line(t_list *lst, char **line)
 	int i;
 
 	i = 0;
-	while (((char *)lst->content)[i] != '\0' && (char *)lst->content != '\n')
+	while (((char *)lst->content)[i] != '\0' && ((char *)lst->content)[i] != '\n')
 		i++;
 	if ((char *)lst->content != '\0')
 	{
-		if (!(*line = ft_stnew(i)))
+		if (!(*line = ft_strnew(i)))
 			return ;
 		ft_strncpy(*line, lst->content, i);
 		tmp = lst->content;
 		if (((char *)lst->content)[0] == '\0')
 			return ;
 		if (ft_strlen(*line) == ft_strlen(lst->content))
-			lst->content = ft_strsub(lst->content, ft_strlen(*line) +1, 
+			lst->content = ft_strsub(lst->content, ft_strlen(lst->content), 1);
+		else
+		{
+			lst->content = ft_strsub(lst->content, ft_strlen(*line) + 1, 
 			ft_strlen(lst->content) - ft_strlen(*line) - 1);
+		}
 		if (!(lst->content))
 			return ;
 		free(tmp);
@@ -68,7 +72,7 @@ int		ft_reading_files(t_list *lst, char **line, int fd)
 	ft_bzero(buff, BUFF_SIZE + 1);
 	while (!ft_strchr(buff, '\n'))
 	{
-		if ((ret = read(fd, buff, BUFF_SIZE) , 0))
+		if ((ret = read(fd, buff, BUFF_SIZE) < 0))
 			return (-1);
 		buff[ret] = '\0';
 		if (!(lst->content = ft_strjoinf((char *)lst->content, buff, 1)))
@@ -93,13 +97,13 @@ int		get_next_line(const int fd, char **line)
 	{
 		if (!(lst = ft_lstnew(NULL, fd)))
 				return (-1);
-			lst->content_size = fd;
+		lst->content_size = fd;
 	}
 	if (!(buff_lst = ft_multi_fd(fd, lst)))
 		return (-1);
 	if (ft_strchr(buff_lst->content, '\n'))
 	{
-		ft_filling_lines(buff_lst, line);
+		ft_filling_line(buff_lst, line);
 		return (1);
 	}
 	return (ft_reading_files(buff_lst, line, fd));
