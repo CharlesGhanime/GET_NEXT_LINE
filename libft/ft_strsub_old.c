@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_lst.c                                       :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/12 17:17:06 by cghanime          #+#    #+#             */
-/*   Updated: 2019/01/12 18:53:31 by cghanime         ###   ########.fr       */
+/*   Created: 2018/11/13 05:35:04 by cghanime          #+#    #+#             */
+/*   Updated: 2019/01/14 18:51:25 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lst_last(t_list *lst)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	t_list *tmp;
+	char	*new;
+	size_t	i;
 
-	tmp = lst;
-	while (lst)
+	if ((int)len < 0 || !s || s == 0)
+		return (0);
+	i = 0;
+	s = s + start;
+	while (s[i] && i != len)
+		i++;
+	if (!(new = (char *)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	if (new == 0)
+		return (0);
+	i = 0;
+	while (i != len)
 	{
-		if (lst->next == NULL)
-			return (lst);
-		lst = lst->next;
+		new[i] = s[i];
+		i++;
 	}
-	return (NULL);
+	new[i] = '\0';
+	return (new);
 }

@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   main_gnl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/14 19:09:01 by cghanime          #+#    #+#             */
-/*   Updated: 2019/01/14 19:10:07 by cghanime         ###   ########.fr       */
+/*   Created: 2019/01/14 14:02:35 by cghanime          #+#    #+#             */
+/*   Updated: 2019/01/14 19:33:42 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "libft/libft.h"
+# include "get_next_line.h"
+# include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+int             main(int argc, char **argv)
 {
-	char	*str;
-	size_t	count;
+	int				fd;
+	char			*line;
+	int				ret;
 
-	count = 0;
-	if (!(str = ft_strnew(		len)) || !s)
-		return (NULL);
-	while (count < len)
+	fd = open("42", O_RDONLY);
+	while(get_next_line(fd, &line) > 0)
 	{
-		str[count] = s[start + count];
-		count += 1;
+		printf("%s\n", line);
 	}
-	return (str);
+	return (0);
 }
