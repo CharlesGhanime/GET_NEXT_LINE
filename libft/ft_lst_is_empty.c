@@ -6,15 +6,15 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:04:05 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/06 18:08:06 by cghanime         ###   ########.fr       */
+/*   Updated: 2019/01/15 19:15:13 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-BOOL	ft_lst_is_empty(t_list *lst)
+int		ft_lst_is_empty(t_list *lst)
 {
 	if (lst == NULL)
-		return (TRUE);
-	return (FALSE);
+		return (0);
+	return (1);
 }

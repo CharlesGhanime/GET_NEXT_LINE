@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:50:18 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/06 18:58:20 by cghanime         ###   ########.fr       */
+/*   Updated: 2019/01/15 19:06:31 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_print_lst(t_list *lst)
 	if (ft_lst_is_empty(lst))
 	{
 		ft_putstr("Liste vide\n");
-		return;
+		return ;
 	}
 	while (lst != NULL)
 	{

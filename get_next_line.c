@@ -6,7 +6,7 @@
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 14:42:15 by cghanime          #+#    #+#             */
-/*   Updated: 2019/01/14 19:19:28 by cghanime         ###   ########.fr       */
+/*   Updated: 2019/01/15 18:49:44 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_list		*fd_management(t_list *lst, int fd)
+t_list		*ft_multi_fd(t_list *lst, int fd)
 {
 	t_list	*head;
 	t_list	*node;
@@ -35,20 +35,20 @@ t_list		*fd_management(t_list *lst, int fd)
 	return (node);
 }
 
-void	fill_line(t_list *lst, char **line)
+void		ft_filling_line(t_list *lst, char **line)
 {
 	char	*tmp;
-	int		index;
+	int		i;
 
-	index = 0;
-	while (((char *)lst->content)[index] != '\n' &&
-			((char *)lst->content)[index] != '\0')
-		index += 1;
+	i = 0;
+	while (((char *)lst->content)[i] != '\n' &&
+			((char *)lst->content)[i] != '\0')
+		i++;
 	if (((char *)lst->content)[0] != '\0')
 	{
-		if (!(*line = ft_strnew(index)))
+		if (!(*line = ft_strnew(i)))
 			return ;
-		ft_strncpy(*line, lst->content, index);
+		ft_strncpy(*line, lst->content, i);
 		tmp = lst->content;
 		if (((char *)lst->content)[0] == '\0')
 			return ;
@@ -63,10 +63,11 @@ void	fill_line(t_list *lst, char **line)
 	}
 }
 
-int		ft_read(t_list *lst, char **line, int fd)
+int			ft_reading_files(t_list *lst, char **line, int fd)
 {
 	char	buff[BUFF_SIZE + 1];
 	int		ret;
+
 	ft_bzero(buff, BUFF_SIZE + 1);
 	while (!ft_strchr(buff, '\n'))
 	{
@@ -80,11 +81,11 @@ int		ft_read(t_list *lst, char **line, int fd)
 	}
 	if (((char *)lst->content)[0] == '\0' && ret == 0)
 		return (0);
-	fill_line(lst, line);
+	ft_filling_line(lst, line);
 	return (1);
 }
 
-int		get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line)
 {
 	static t_list	*lst;
 	t_list			*buff_lst;
@@ -97,12 +98,12 @@ int		get_next_line(const int fd, char **line)
 			return (-1);
 		lst->content_size = fd;
 	}
-	if (!(buff_lst = fd_management(lst, fd)))
+	if (!(buff_lst = ft_multi_fd(lst, fd)))
 		return (-1);
 	if (ft_strchr(buff_lst->content, '\n'))
 	{
-		fill_line(buff_lst, line);
+		ft_filling_line(buff_lst, line);
 		return (1);
 	}
-	return (ft_read(buff_lst, line, fd));
+	return (ft_reading_files(buff_lst, line, fd));
 }

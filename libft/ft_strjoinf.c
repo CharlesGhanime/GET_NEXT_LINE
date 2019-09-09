@@ -5,35 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cghanime <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 05:43:02 by cghanime          #+#    #+#             */
-/*   Updated: 2018/12/19 19:53:24 by cghanime         ###   ########.fr       */
+/*   Created: 2019/01/15 17:50:55 by cghanime          #+#    #+#             */
+/*   Updated: 2019/01/15 19:11:30 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		s_management(char **new_str, char *s1, char *s2)
+static	int		s_management(char **new_str, char *s1, char *s2)
 {
 	if (s1 == NULL)
 	{
-		if(!(*new_str = ft_strdup(s2)))
+		if (!(*new_str = ft_strdup(s2)))
 			return (-1);
 		return (1);
 	}
 	else if (s2 == NULL)
 	{
-		if(!(*new_str = ft_strdup(s1)))
+		if (!(*new_str = ft_strdup(s1)))
 			return (-1);
 		return (2);
 	}
 	return (0);
 }
-char		*ft_strjoinf(char *s1, char *s2, int flag)
+
+char			*ft_strjoinf(char *s1, char *s2, int flag)
 {
-	char    *tmp;
-	char    *new_str;
-	int     len_s1;
-	int     len_s2;
+	char	*tmp;
+	char	*new_str;
+	int		len_s1;
+	int		len_s2;
+
 	if (s_management(&new_str, s1, s2) != 0)
 		return (new_str);
 	len_s1 = ft_strlen(s1);
